@@ -1,0 +1,4 @@
+anthropic
+tavily-python
+flask
+python-dotenv
