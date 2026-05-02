@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify
 from researcher import run_all_topics
 import threading
 import time
+import os 
 
 app = Flask(__name__)
 
