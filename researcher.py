@@ -5,7 +5,6 @@ from tavily import TavilyClient
 
 load_dotenv()
 client = anthropic.Anthropic()
-tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 tools = [
     {
@@ -37,6 +36,7 @@ TOPICS = {
 }
 
 def run_research(topic_key):
+    tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
     """Run a single research agent for a given topic."""
     topic = TOPICS[topic_key]
     print(f"\n>>> Researching: {topic['label']}")
