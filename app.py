@@ -29,7 +29,7 @@ def run_research_background():
 def start_scheduler():
     #schedule.every().monday.at("07:00").do(run_research_background)
     # temporary for test
-    schedule.every(2).minutes.do(run_research_background)
+    schedule.every(5).minutes.do(run_research_background)
     print(">>> Scheduler started — runs every Monday at 07:00")
     while True:
         schedule.run_pending()
