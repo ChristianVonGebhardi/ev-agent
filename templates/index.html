@@ -55,7 +55,7 @@
         async function checkStatus() {
             const res = await fetch('/api/status');
             const data = await res.json();
-            if (data.status === 'done') {
+            if (data.status === 'done' || data.status === 'error') {    // to hanle error status
                 clearInterval(polling);
                 document.getElementById('refreshBtn').disabled = false;
                 document.getElementById('statusMsg').textContent =
