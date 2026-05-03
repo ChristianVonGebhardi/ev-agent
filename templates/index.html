@@ -77,6 +77,21 @@
                 grid.appendChild(card);
             }
         }
+
+        window.onload = async function() {
+            const res = await fetch('/api/status');
+            const data = await res.json();
+            if (data.status === 'done') {
+                document.getElementById('statusMsg').textContent =
+                    'Last updated: ' + data.last_updated;
+                loadResults();
+            } else if (data.status === 'running') {
+                document.getElementById('refreshBtn').disabled = true;
+                document.getElementById('statusMsg').innerHTML =
+                    '<span class="spinner"></span>Researching all topics...';
+                polling = setInterval(checkStatus, 3000);
+            }
+        }
     </script>
 </body>
 </html>
