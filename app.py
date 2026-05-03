@@ -15,15 +15,21 @@ cache = {
 
 def run_research_background():
     cache["status"] = "running"
-    cache["results"] = run_all_topics()
-    cache["last_updated"] = time.strftime("%Y-%m-%d %H:%M")
-    cache["status"] = "done"
-    print(f">>> Scheduled research completed at {cache['last_updated']}")
+    
+    # wrap the research in a try/except so status always gets updated even if it crashes
+    try:    
+        cache["results"] = run_all_topics()
+        cache["last_updated"] = time.strftime("%Y-%m-%d %H:%M")
+        cache["status"] = "done"
+    except Exception as e:
+        cache["status"] = "error"
+        cache["last_updated"] = time.strftime("%Y-%m-%d %H:%M")
+        print(f">>> Research failed: {e}")
 
 def start_scheduler():
-    schedule.every().monday.at("07:00").do(run_research_background)
+    #schedule.every().monday.at("07:00").do(run_research_background)
     # temporary for test
-    #schedule.every(2).minutes.do(run_research_background)
+    schedule.every(2).minutes.do(run_research_background)
     print(">>> Scheduler started — runs every Monday at 07:00")
     while True:
         schedule.run_pending()
