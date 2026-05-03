@@ -27,9 +27,9 @@ def run_research_background():
         print(f">>> Research failed: {e}")
 
 def start_scheduler():
-    #schedule.every().monday.at("07:00").do(run_research_background)
+    schedule.every().monday.at("07:00").do(run_research_background)
     # temporary for test
-    schedule.every(5).minutes.do(run_research_background)
+    #schedule.every(5).minutes.do(run_research_background)
     print(">>> Scheduler started — runs every Monday at 07:00")
     while True:
         schedule.run_pending()
@@ -59,9 +59,9 @@ def refresh():
     return jsonify({"status": "started"})
 
 if __name__ == "__main__":
-    scheduler_thread = threading.Thread(target=start_scheduler)
-    scheduler_thread.daemon = True
-    scheduler_thread.start()
+    #scheduler_thread = threading.Thread(target=start_scheduler)
+    #scheduler_thread.daemon = True
+    #scheduler_thread.start()
 
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
